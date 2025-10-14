@@ -163,7 +163,7 @@
             { sound: "q128.wav", answer: "アオバ", image: "r128.png" }
         ];
         
-        let questions = allQuestions.slice().sort(() => Math.random() - 0.5).slice(0, 10);
+        let questions = allQuestions.map(q => ({q: q, w: Math.random()})).sort((a, b) => a.w - b.w).map(a => a.q).slice(0, 10);
         let currentQuestion = 0;
         let score = 0;
         
