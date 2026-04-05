@@ -8,10 +8,10 @@
         body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
         input, button { margin: 10px; padding: 10px; font-size: 16px; }
         #result-container { display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 10px; }
-        #resultImage { width: 200px; margin-top: 10px; display: none; } /* 初期状態は非表示 */
+        #resultImage { width: 200px; margin-top: 10px; display: none; }
         #score { display: none; font-size: 20px; font-weight: bold; margin-top: 20px; }
-        #screenshotButton { display: none; margin-top: 20px; padding: 10px; font-size: 16px; margin: 20px auto; } /* 初期状態は非表示で最後に表示 */
-        #passButton { margin-top: 10px; padding: 10px; font-size: 16px; } /* パスボタンのスタイル */
+        #screenshotButton { display: none; margin-top: 20px; padding: 10px; font-size: 16px; margin: 20px auto; }
+        #passButton { margin-top: 10px; padding: 10px; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -160,12 +160,24 @@
             { sound: "q125.wav", answer: "フユ", image: "r125.png" },
             { sound: "q126.wav", answer: "ミヨ", image: "r126.png" },
             { sound: "q127.wav", answer: "リツ", image: "r127.png" },
-            { sound: "q128.wav", answer: "アオバ", image: "r128.png" }
+            { sound: "q128.wav", answer: "アオバ", image: "r128.png" },
+            { sound: "q129.wav", answer: "ラブ", image: "r129.png" },
+            { sound: "q130.wav", answer: "スバル", image: "r130.png" },
+            { sound: "q131.wav", answer: "タカネ", image: "r131.png" },
+            { sound: "q132.wav", answer: "ヤクモ", image: "r132.png" },
+            { sound: "q133.wav", answer: "ケイ", image: "r133.png" }
         ];
         
         let questions = allQuestions.slice().sort(() => Math.random() - 0.5).slice(0, 10);
         let currentQuestion = 0;
         let score = 0;
+
+        // ⭐ ここだけ追加（Enterで回答）
+        document.getElementById("answer").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        });
         
         function playSound() {
             document.getElementById("quizSound").src = questions[currentQuestion].sound;
